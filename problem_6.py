@@ -68,6 +68,12 @@ def _flash_attention_forward_swa_kernel(
     # Case q_block
     q_block = tl.cast(q_block, tl.float32)
 
+    # Define NEG_INF
+    NEG_INF = -1e9  # use a large finite negative instead of -inf
+
+    # Calculate q_mask
+    q_mask = q_offsets < SEQ_LEN
+
     # --- Phase 1: Off-Diagonal Blocks (within the window) ---
     for start_n in range(window_start, q_block_idx * BLOCK_M, BLOCK_N):
         # STUDENT IMPLEMENTATION REQUIRED (Part 3: SWA Logic)
