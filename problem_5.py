@@ -33,10 +33,13 @@ def _flash_attention_forward_gqa_kernel(
 
     # --- STUDENT IMPLEMENTATION REQUIRED HERE (Part 1) ---
     # Your goal is to map the current query head (q_head_idx) to its corresponding shared key/value head (kv_head_idx).
-    # 1. Calculate how many query heads are in each group.
-    # 2. Use integer division to find the correct kv_head_idx.
     
-    kv_head_idx = 0 # Placeholder: Replace with your calculation
+    # 1. Calculate how many query heads are in each group.
+    n_q_heads_per_group = N_Q_HEADS // N_KV_HEADS
+
+    # 2. Use integer division to find the correct kv_head_idx.
+    kv_head_idx = q_head_idx // n_q_heads_per_group
+
     # --- END OF STUDENT IMPLEMENTATION ---
 
 
