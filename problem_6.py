@@ -70,7 +70,7 @@ def _flash_attention_forward_swa_kernel(
         # STUDENT IMPLEMENTATION REQUIRED (Part 3: SWA Logic)
         # Hint: You might need to apply the per-element sliding window mask to s_ij.
         #    - A score is invalid if `(query_offset - key_offset) >= WINDOW_SIZE`.
-        k_offsets = (start_n + tl.arange(x0, BLOCK_N))
+        k_offsets = (start_n + tl.arange(x, BLOCK_N))
         k_mask = k_offsets < SEQ_LEN
 
         k_ptrs = K_ptr + batch_idx * k_stride_b + kv_head_idx * k_stride_h + \
