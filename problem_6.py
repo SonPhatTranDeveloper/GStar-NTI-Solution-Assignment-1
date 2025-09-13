@@ -65,6 +65,9 @@ def _flash_attention_forward_swa_kernel(
         window_seq_start = 0
     window_start = (window_seq_start // BLOCK_N) * BLOCK_N
 
+    # Case q_block
+    q_block = tl.cast(q_block, tl.float32)
+
     # --- Phase 1: Off-Diagonal Blocks (within the window) ---
     for start_n in range(window_start, q_block_idx * BLOCK_M, BLOCK_N):
         # STUDENT IMPLEMENTATION REQUIRED (Part 3: SWA Logic)
