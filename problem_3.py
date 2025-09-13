@@ -63,6 +63,10 @@ def _flash_attention_forward_kernel(
 
         # --- STUDENT IMPLEMENTATION REQUIRED HERE ---
         # Implement the online softmax update logic.
+
+        # Casting 
+        v_block = tl.cast(v_block, tl.float32)
+
         # 1. Find the new running maximum (`m_new`).
         m_i_ = tl.max(s_ij, axis=1)
         m_i_new = tl.maximum(m_i, m_i_)
